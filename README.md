@@ -9,7 +9,7 @@ A library which extends typescript to support error handling patterns found in l
 
 - [ ] Match typesafe autocomplete
 - [x] ~Option~
-- [x] ~Resul~
+- [x] ~Result~
 
 
 ## Using Option
