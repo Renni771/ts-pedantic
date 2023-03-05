@@ -11,8 +11,15 @@ A library which extends typescript to support error handling patterns found in l
 - [x] ~Option~
 - [x] ~Result~
 
+## Rationale
+Options and Results encourage more pedantic error handling. Most importantly, your code indicates whether a function
+can throw, and in that case exactly what those errors are, at the type level. These patterns encourage you to handle errors meticulously
+and to write more declarative code with easy APIs telling readers what is to be done in most common error cases. Options and Results prevent
+the need for `try...catch` blocks everywhere.
 
 ## Using Option
+We use an `Option` type when we only care about the value. If we get back a `None`, we know there is no value and aren't concerned with
+why the value is empty.
 
 ```typescript
 type User = {
@@ -39,6 +46,7 @@ if (userOption.isSome) {
 ```
 
 ## Using Result
+`Result` types can be seen as an extension of `Option` where we're also concerned with the possible causes of an error.
 
 ```typescript
 type User = {
@@ -75,6 +83,10 @@ if (userResult.isOk) {
   // ^? type error = DbReadError
 }
 ```
+
+## To `Option` or to `Result`?
+`Result` basically has all the superpowers of `Option` but with added functionality. When to use either is a question
+of what tool to use for what job. Use the primitive that best suits your current use-case.
 
 ## Using Match
 
