@@ -9,9 +9,9 @@ type OptionMatcher<T> = {
   onNone: OnNoneReturnType;
 };
 
-export const isOptionMatcher = <T>(
+export function isOptionMatcher<T>(
   matcher: unknown
-): matcher is OptionMatcher<T> => {
+): matcher is OptionMatcher<T> {
   return (
     typeof matcher === 'object' &&
     matcher !== null &&
@@ -31,9 +31,9 @@ type ResultMatcher<T, E extends Error> = {
   onError: OnErrorReturnType<E>;
 };
 
-export const isResultMatcher = <T, E extends Error>(
+export function isResultMatcher<T, E extends Error>(
   matcher: unknown
-): matcher is ResultMatcher<T, E> => {
+): matcher is ResultMatcher<T, E> {
   return (
     typeof matcher === 'object' &&
     matcher !== null &&
