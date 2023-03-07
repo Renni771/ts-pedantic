@@ -1,27 +1,24 @@
-interface ResultBase<T> {
-  isOk: boolean;
-  isError: boolean;
-
+type ResultBase<T> = {
   unwrapOrDefault: (fallback: T) => T;
-  unwrapOrElse: (callback: () => unknown) => T | ReturnType<typeof callback>;
-  unwrapOrThrow: () => T | void;
+  unwrapOrElse: (orElse: () => unknown) => T | ReturnType<typeof orElse>;
+  unwrapOrThrow: (errorMessage?: string) => T | void;
 }
 
-export interface Ok<T> extends ResultBase<T> {
+export type Ok<T> = {
   isOk: true;
   isError: false;
   value: T;
-}
+} & ResultBase<T>;
 
-export interface Err<T, E extends Error> extends ResultBase<T> {
+export type Err<T, E extends Error> = {
   isOk: false;
   isError: true;
   error: E;
-}
+} & ResultBase<T>;
 
 export type Result<T, E extends Error> = Ok<T> | Err<T, E>;
 
-export const ok = <T>(value: T): Ok<T> => {
+export function ok<T>(value: T): Ok<T> {
   return {
     unwrapOrDefault: () => value,
     unwrapOrElse: () => value,
@@ -33,7 +30,7 @@ export const ok = <T>(value: T): Ok<T> => {
   };
 };
 
-export const error = <T, E extends Error>(error: E): Err<T, E> => {
+export function error<T, E extends Error>(error: E): Err<T, E> {
   return {
     unwrapOrDefault: (fallback: T): T => fallback,
     unwrapOrElse: (callback: () => unknown): unknown => callback(),
@@ -47,9 +44,9 @@ export const error = <T, E extends Error>(error: E): Err<T, E> => {
   };
 };
 
-export const isResult = <T, E extends Error>(
+export function isResult<T, E extends Error>(
   obj: unknown
-): obj is Result<T, E> => {
+): obj is Result<T, E> {
   return (
     typeof obj === 'object' &&
     obj !== null &&

@@ -1,26 +1,23 @@
-interface OptionBase<T> {
-  isSome: boolean;
-  isNone: boolean;
-
+type OptionBase<T> = {
   unwrapOrDefault: (fallback: T) => T;
   unwrapOrElse: (orElse: () => unknown) => T | ReturnType<typeof orElse>;
   unwrapOrThrow: (errorMessage?: string) => T | void;
 }
 
-export interface Some<T> extends OptionBase<T> {
+export type Some<T> = {
   isNone: false;
   isSome: true;
   value: T;
-}
+} & OptionBase<T>;
 
-export interface None<T> extends OptionBase<T> {
+export type None<T> = {
   isNone: true;
   isSome: false;
-}
+} & OptionBase<T>;
 
 export type Option<T> = Some<T> | None<T>;
 
-export const some = <T>(value: T): Some<T> => {
+export function some<T>(value: T): Some<T> {
   return {
     unwrapOrDefault: () => value,
     unwrapOrElse: () => value,
@@ -32,7 +29,7 @@ export const some = <T>(value: T): Some<T> => {
   };
 };
 
-export const none = <T>(): None<T> => {
+export function none<T>(): None<T> {
   return {
     unwrapOrDefault: (fallback: T): T => fallback,
     unwrapOrElse: (callback: () => unknown): unknown => callback(),
@@ -45,7 +42,7 @@ export const none = <T>(): None<T> => {
   };
 };
 
-export const isOption = <T>(obj: unknown): obj is Option<T> => {
+export function isOption<T>(obj: unknown): obj is Option<T> {
   return (
     typeof obj === 'object' &&
     obj !== null &&
