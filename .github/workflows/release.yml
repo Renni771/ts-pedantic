@@ -9,10 +9,17 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout Repo
+        uses: actions/checkout@v3
 
       - name: Setup PNPM
-        uses: pnpm/action-setup@v2
+        uses: pnpm/action-setup@v2.2.4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.x
+          cache: pnpm
 
       - name: Setup node
         uses: actions/setup-node@v3
