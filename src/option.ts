@@ -1,6 +1,6 @@
 type OptionBase<T> = {
   unwrapOrDefault: (fallback: T) => T;
-  unwrapOrElse: (orElse: () => unknown) => T | ReturnType<typeof orElse>;
+  unwrapOrElse: (orElse: () => T) => T
   unwrapOrThrow: (errorMessage?: string) => T | never;
 }
 
@@ -32,7 +32,7 @@ export function some<T>(value: T): Some<T> {
 export function none<T>(): None<T> {
   return {
     unwrapOrDefault: (fallback: T): T => fallback,
-    unwrapOrElse: (callback: () => unknown): unknown => callback(),
+    unwrapOrElse: (orElse: () => T): T => orElse(),
     unwrapOrThrow: (errorMessage?: string): never => {
       throw Error(errorMessage ? errorMessage : 'No value found');
     },

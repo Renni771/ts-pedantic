@@ -1,6 +1,6 @@
 type ResultBase<T> = {
   unwrapOrDefault: (fallback: T) => T;
-  unwrapOrElse: (orElse: () => unknown) => T | ReturnType<typeof orElse>;
+  unwrapOrElse: (orElse: () => T) => T;
   unwrapOrThrow: (errorMessage?: string) => T | never;
 }
 
@@ -33,7 +33,7 @@ export function ok<T>(value: T): Ok<T> {
 export function error<T, E extends Error>(error: E): Err<T, E> {
   return {
     unwrapOrDefault: (fallback: T): T => fallback,
-    unwrapOrElse: (callback: () => unknown): unknown => callback(),
+    unwrapOrElse: (orElse: () => T): T => orElse(),
     unwrapOrThrow: (errorMessage?: string): never => {
       throw Error(errorMessage ? errorMessage : `Result error: ${error}`);
     },
