@@ -1,7 +1,7 @@
 type ResultBase<T> = {
   unwrapOrDefault: (fallback: T) => T;
   unwrapOrElse: (orElse: () => unknown) => T | ReturnType<typeof orElse>;
-  unwrapOrThrow: (errorMessage?: string) => T | void;
+  unwrapOrThrow: (errorMessage?: string) => T | never;
 }
 
 export type Ok<T> = {
