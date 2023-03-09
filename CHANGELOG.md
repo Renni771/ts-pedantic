@@ -1,5 +1,11 @@
 # ts-pedantic
 
+## 0.0.13
+
+### Patch Changes
+
+- f34df24: No changes, just adding a .npmignore file
+
 ## 0.0.12
 
 ### Patch Changes
