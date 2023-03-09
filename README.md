@@ -2,15 +2,6 @@
 
 A library which extends typescript to support error handling patterns found in languages like Rust.
 
-## Roadmap
-
-> **Warning**
-> This library is still a work in progress, and I'm building it in public. Please feel free to contribute if you find any issues!
-
-- [ ] Match typesafe autocomplete
-- [x] ~Option~
-- [x] ~Result~
-
 ## Rationale
 
 Options and Results encourage more pedantic error handling. Most importantly, your code indicates whether a function
