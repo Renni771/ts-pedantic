@@ -19,7 +19,7 @@
     "clean": "rm -rf {dist,node_modules}",
     "format": "prettier --write .",
     "lint": "tsc",
-    "publish": "pnpm build && changeset publish"
+    "release": "pnpm build && changeset publish"
   },
   "devDependencies": {
     "@changesets/cli": "2.26.0",
