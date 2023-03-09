@@ -1,5 +1,11 @@
 # ts-pedantic
 
+## 0.0.10
+
+### Patch Changes
+
+- 5b7d9b7: fix: Call changeset publish in release job
+
 ## 0.0.9
 
 ### Patch Changes
