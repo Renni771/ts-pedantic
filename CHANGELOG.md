@@ -1,5 +1,11 @@
 # ts-pedantic
 
+## 0.0.12
+
+### Patch Changes
+
+- 8409ccc: No changes, just reconfiguring changeset for npm publishing.
+
 ## 0.0.11
 
 ### Patch Changes
