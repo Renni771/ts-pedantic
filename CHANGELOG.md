@@ -1,5 +1,11 @@
 # ts-pedantic
 
+## 0.0.11
+
+### Patch Changes
+
+- b8de4df: fix: Call "release" script in release job
+
 ## 0.0.10
 
 ### Patch Changes
