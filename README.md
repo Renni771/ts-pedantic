@@ -1,6 +1,17 @@
-# TS Pedantic
+<p align="center">
+  <h1 align="center">TS Pedantic</h1>
+  <p align="center">
+    <br/>
+    Rust like error handling for Typescript.
+  </p>
+</p>
 
-A library which extends typescript to support error handling patterns found in languages like Rust.
+<p align="center">
+  <a href="https://img.shields.io/npm/v/ts-pedantic" rel="nofollow"><img src="https://img.shields.io/github/license/colinhacks/zod" alt="npm"></a>
+  <a href="https://img.shields.io/github/license/Renni771/ts-pendantic" rel="nofollow"><img src="https://img.shields.io/github/license/Renni771/ts-pendantic" alt="License"></a>
+</p>
+
+<br/>
 
 ## Rationale
 
