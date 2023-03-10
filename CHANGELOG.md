@@ -1,5 +1,11 @@
 # ts-pedantic
 
+## 0.1.0
+
+### Minor Changes
+
+- 5067874: feat: Add `map` for results and options, and `mapError` for results
+
 ## 0.0.13
 
 ### Patch Changes
