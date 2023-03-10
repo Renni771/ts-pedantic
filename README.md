@@ -7,8 +7,12 @@
 </p>
 
 <p align="center">
-  <a href="https://img.shields.io/npm/v/ts-pedantic" rel="nofollow"><img src="https://img.shields.io/github/license/colinhacks/zod" alt="npm"></a>
-  <a href="https://img.shields.io/github/license/Renni771/ts-pendantic" rel="nofollow"><img src="https://img.shields.io/github/license/Renni771/ts-pendantic" alt="License"></a>
+  <a href="https://img.shields.io/npm/v/ts-pedantic" rel="nofollow">
+    <img src="https://img.shields.io/npm/v/ts-pedantic" alt="npm version">
+  </a>
+  <a href="https://img.shields.io/github/license/Renni771/ts-pedantic" rel="nofollow">
+    <img src="https://img.shields.io/github/license/Renni771/ts-pedantic" alt="License">
+  </a>
 </p>
 
 <br/>
