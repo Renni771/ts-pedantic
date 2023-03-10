@@ -1,48 +1,67 @@
-type ResultBase<T> = {
+type ResultBase<T, E extends Error> = {
   unwrapOrDefault: (fallback: T) => T;
   unwrapOrElse: (orElse: () => T) => T;
   unwrapOrThrow: (errorMessage?: string) => T | never;
-}
 
-export type Ok<T> = {
+  map: <TMappedValue>(
+    mapper: (value: T) => TMappedValue
+  ) => Result<TMappedValue, E>;
+
+  mapError: <TMappedError extends Error>(
+    mapper: (err: E) => TMappedError
+  ) => Result<T, TMappedError>;
+};
+
+export type Ok<T, E extends Error> = {
   isOk: true;
   isError: false;
   value: T;
-} & ResultBase<T>;
+} & ResultBase<T, E>;
 
 export type Err<T, E extends Error> = {
   isOk: false;
   isError: true;
   error: E;
-} & ResultBase<T>;
+} & ResultBase<T, E>;
 
-export type Result<T, E extends Error> = Ok<T> | Err<T, E>;
+export type Result<T, E extends Error> = Ok<T, E> | Err<T, E>;
 
-export function ok<T>(value: T): Ok<T> {
+export function ok<T, E extends Error>(value: T): Ok<T, E> {
   return {
     unwrapOrDefault: () => value,
     unwrapOrElse: () => value,
     unwrapOrThrow: () => value,
 
+    map: <TMappedValue>(mapper: (value: T) => TMappedValue) => {
+      return ok<TMappedValue, E>(mapper(value));
+    },
+    mapError: () => ok(value),
+
+
     isOk: true,
     isError: false,
     value
   };
-};
+}
 
-export function error<T, E extends Error>(error: E): Err<T, E> {
+export function error<T, E extends Error>(err: E): Err<T, E> {
   return {
     unwrapOrDefault: (fallback: T): T => fallback,
     unwrapOrElse: (orElse: () => T): T => orElse(),
     unwrapOrThrow: (errorMessage?: string): never => {
-      throw Error(errorMessage ? errorMessage : `Result error: ${error}`);
+      throw Error(errorMessage ? errorMessage : `Result error: ${err}`);
+    },
+
+    map: () => error(err),
+    mapError: <TMappedError extends Error>(mapper: (err: E) => TMappedError) => {
+      return error<T, TMappedError>(mapper(err));
     },
 
     isOk: false,
     isError: true,
-    error
+    error: err
   };
-};
+}
 
 export function isResult<T, E extends Error>(
   obj: unknown
@@ -65,4 +84,4 @@ export function isResult<T, E extends Error>(
     typeof obj.unwrapErrorOrThrow === 'function' &&
     ('error' in obj || 'value' in obj)
   );
-};
+}
