@@ -1,5 +1,11 @@
 # ts-pedantic
 
+## 0.1.1
+
+### Patch Changes
+
+- c9b816c: No changes, just publishing the newest README changes to npm
+
 ## 0.1.0
 
 ### Minor Changes
