@@ -7,7 +7,7 @@
 </p>
 
 <p align="center">
-  <a href="https://img.shields.io/npm/v/ts-pedantic" rel="nofollow">
+  <a href="https://www.npmjs.com/package/ts-pedantic" rel="nofollow">
     <img src="https://img.shields.io/npm/v/ts-pedantic" alt="npm version">
   </a>
   <a href="https://img.shields.io/github/license/Renni771/ts-pedantic" rel="nofollow">
