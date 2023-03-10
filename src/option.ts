@@ -2,7 +2,11 @@ type OptionBase<T> = {
   unwrapOrDefault: (fallback: T) => T;
   unwrapOrElse: (orElse: () => T) => T
   unwrapOrThrow: (errorMessage?: string) => T | never;
-}
+
+  map: <TMappedValue>(
+    mapper: (value: T) => TMappedValue
+  ) => Option<TMappedValue>;
+};
 
 export type Some<T> = {
   isNone: false;
@@ -17,30 +21,35 @@ export type None<T> = {
 
 export type Option<T> = Some<T> | None<T>;
 
-export function some<T>(value: T): Some<T> {
+export function some<T>(value: T): Option<T> {
   return {
     unwrapOrDefault: () => value,
     unwrapOrElse: () => value,
     unwrapOrThrow: () => value,
 
+    map: <TMappedValue>(mapper: (value: T) => TMappedValue) => {
+      return some<TMappedValue>(mapper(value));
+    },
+
     isNone: false,
     isSome: true,
     value
   };
-};
+}
 
-export function none<T>(): None<T> {
+export function none<T>(): Option<T> {
   return {
     unwrapOrDefault: (fallback: T): T => fallback,
     unwrapOrElse: (orElse: () => T): T => orElse(),
     unwrapOrThrow: (errorMessage?: string): never => {
       throw Error(errorMessage ? errorMessage : 'No value found');
     },
+    map: <TMappedValue>() => none<TMappedValue>(),
 
     isNone: true,
     isSome: false
   };
-};
+}
 
 export function isOption<T>(obj: unknown): obj is Option<T> {
   return (
@@ -61,4 +70,4 @@ export function isOption<T>(obj: unknown): obj is Option<T> {
     typeof obj.unwrapErrorOrThrow === 'function' &&
     ('error' in obj || 'value' in obj)
   );
-};
+}
