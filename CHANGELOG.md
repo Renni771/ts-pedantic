@@ -1,5 +1,11 @@
 # ts-pedantic
 
+## 0.1.4
+
+### Patch Changes
+
+- 4c2f349: ci: Exclude test directory from npm publish
+
 ## 0.1.3
 
 ### Patch Changes
