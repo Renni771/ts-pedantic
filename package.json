@@ -2,7 +2,7 @@
   "name": "ts-pedantic",
   "description": "Rust like error handling for Typescript.",
   "private": false,
-  "version": "0.1.2",
+  "version": "0.1.3",
   "keywords": [],
   "author": "Rendani Gangazhe",
   "main": "dist/index.js",

@@ -1,5 +1,11 @@
 # ts-pedantic
 
+## 0.1.3
+
+### Patch Changes
+
+- 2cc49a5: test: Add tests and adjust CI job to lint, built and test project
+
 ## 0.1.2
 
 ### Patch Changes
