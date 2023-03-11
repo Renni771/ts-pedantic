@@ -1,14 +1,6 @@
 import { match } from './match';
-import { Option, none, some } from './option';
-import { Result, ok, error } from './result';
+import { Option, none, some, isOption } from './option';
+import { Result, ok, error, isResult } from './result';
 
-// Option
-export { none, some };
-export type { Option };
-
-// Result
-export { ok, error };
-export type { Result };
-
-// Match
-export { match };
+export { none, some, isOption, ok, error, isResult, match };
+export type { Option, Result };

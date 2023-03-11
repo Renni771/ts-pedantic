@@ -1,7 +1,7 @@
 import { isOption, Option } from './option';
 import { isResult, Result } from './result';
 
-type OptionMatcher<T> = {
+export type OptionMatcher<T> = {
   onSome: (value: T) => unknown;
   onNone: () => unknown;
 };
@@ -18,9 +18,9 @@ export function isOptionMatcher<T>(
     'onNone' in matcher &&
     typeof matcher.onNone === 'function'
   );
-};
+}
 
-type ResultMatcher<T, E extends Error> = {
+export type ResultMatcher<T, E extends Error> = {
   onOk: (value: T) => unknown;
   onError: (error: E) => unknown;
 };
@@ -37,7 +37,7 @@ export function isResultMatcher<T, E extends Error>(
     'onError' in matcher &&
     typeof matcher.onError === 'function'
   );
-};
+}
 
 export function match<T, E extends Error | undefined = undefined>(
   pattern: E extends Error ? Result<T, E> : Option<T>,
