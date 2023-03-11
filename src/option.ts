@@ -1,6 +1,6 @@
 type OptionBase<T> = {
   unwrapOrDefault: (fallback: T) => T;
-  unwrapOrElse: (orElse: () => T) => T
+  unwrapOrElse: (orElse: () => T) => T;
   unwrapOrThrow: (errorMessage?: string) => T | never;
 
   map: <TMappedValue>(
@@ -42,7 +42,7 @@ export function none<T>(): Option<T> {
     unwrapOrDefault: (fallback: T): T => fallback,
     unwrapOrElse: (orElse: () => T): T => orElse(),
     unwrapOrThrow: (errorMessage?: string): never => {
-      throw Error(errorMessage ? errorMessage : 'No value found');
+      throw new Error(errorMessage ? errorMessage : 'No value to unwrap.');
     },
     map: <TMappedValue>() => none<TMappedValue>(),
 
@@ -60,14 +60,14 @@ export function isOption<T>(obj: unknown): obj is Option<T> {
     typeof obj.isSome === 'boolean' &&
     'isNone' in obj &&
     typeof obj.isNone === 'boolean' &&
-    'unwrapOrThrow' in obj &&
-    typeof obj.unwrapOrThrow === 'function' &&
-    'unwrapOrElse' in obj &&
-    typeof obj.unwrapOrElse === 'function' &&
     'unwrapOrDefault' in obj &&
     typeof obj.unwrapOrDefault === 'function' &&
-    'unwrapErrorOrThrow' in obj &&
-    typeof obj.unwrapErrorOrThrow === 'function' &&
-    ('error' in obj || 'value' in obj)
+    'unwrapOrElse' in obj &&
+    typeof obj.unwrapOrElse === 'function' &&
+    'unwrapOrThrow' in obj &&
+    typeof obj.unwrapOrThrow === 'function' &&
+    'map' in obj &&
+    typeof obj.map === 'function' &&
+    ('value' in obj || !('value' in obj))
   );
 }

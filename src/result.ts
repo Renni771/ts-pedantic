@@ -37,7 +37,6 @@ export function ok<T, E extends Error>(value: T): Result<T, E> {
     },
     mapError: () => ok(value),
 
-
     isOk: true,
     isError: false,
     value
@@ -49,11 +48,13 @@ export function error<T, E extends Error>(err: E): Result<T, E> {
     unwrapOrDefault: (fallback: T): T => fallback,
     unwrapOrElse: (orElse: () => T): T => orElse(),
     unwrapOrThrow: (errorMessage?: string): never => {
-      throw Error(errorMessage ? errorMessage : `Result error: ${err}`);
+      throw new Error(errorMessage ? errorMessage : `No value to unwrap. Wrapped error: ${err}`);
     },
 
     map: () => error(err),
-    mapError: <TMappedError extends Error>(mapper: (err: E) => TMappedError) => {
+    mapError: <TMappedError extends Error>(
+      mapper: (err: E) => TMappedError
+    ) => {
       return error<T, TMappedError>(mapper(err));
     },
 
@@ -80,8 +81,7 @@ export function isResult<T, E extends Error>(
     typeof obj.unwrapOrElse === 'function' &&
     'unwrapOrDefault' in obj &&
     typeof obj.unwrapOrDefault === 'function' &&
-    'unwrapErrorOrThrow' in obj &&
-    typeof obj.unwrapErrorOrThrow === 'function' &&
-    ('error' in obj || 'value' in obj)
+    ((!('error' in obj) && 'value' in obj) ||
+      ('error' in obj && !('value' in obj)))
   );
 }
