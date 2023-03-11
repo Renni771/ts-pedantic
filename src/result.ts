@@ -26,7 +26,7 @@ export type Err<T, E extends Error> = {
 
 export type Result<T, E extends Error> = Ok<T, E> | Err<T, E>;
 
-export function ok<T, E extends Error>(value: T): Ok<T, E> {
+export function ok<T, E extends Error>(value: T): Result<T, E> {
   return {
     unwrapOrDefault: () => value,
     unwrapOrElse: () => value,
@@ -44,7 +44,7 @@ export function ok<T, E extends Error>(value: T): Ok<T, E> {
   };
 }
 
-export function error<T, E extends Error>(err: E): Err<T, E> {
+export function error<T, E extends Error>(err: E): Result<T, E> {
   return {
     unwrapOrDefault: (fallback: T): T => fallback,
     unwrapOrElse: (orElse: () => T): T => orElse(),
