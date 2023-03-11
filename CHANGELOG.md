@@ -1,5 +1,11 @@
 # ts-pedantic
 
+## 0.1.2
+
+### Patch Changes
+
+- 25e8b0f: fix: Return `Result<T, E>` parent type for `ok` and `error` functions
+
 ## 0.1.1
 
 ### Patch Changes
