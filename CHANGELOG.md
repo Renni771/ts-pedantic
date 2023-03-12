@@ -1,5 +1,11 @@
 # ts-pedantic
 
+## 0.2.0
+
+### Minor Changes
+
+- 0c62cec: feat: Make error of result type more generic
+
 ## 0.1.4
 
 ### Patch Changes
