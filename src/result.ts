@@ -1,4 +1,4 @@
-type ResultBase<T, E extends Error> = {
+type ResultBase<T, E> = {
   unwrapOrDefault: (fallback: T) => T;
   unwrapOrElse: (orElse: () => T) => T;
   unwrapOrThrow: (errorMessage?: string) => T | never;
@@ -7,26 +7,26 @@ type ResultBase<T, E extends Error> = {
     mapper: (value: T) => TMappedValue
   ) => Result<TMappedValue, E>;
 
-  mapError: <TMappedError extends Error>(
+  mapError: <TMappedError>(
     mapper: (err: E) => TMappedError
   ) => Result<T, TMappedError>;
 };
 
-export type Ok<T, E extends Error> = {
+export type Ok<T, E> = {
   isOk: true;
   isError: false;
   value: T;
 } & ResultBase<T, E>;
 
-export type Err<T, E extends Error> = {
+export type Err<T, E> = {
   isOk: false;
   isError: true;
   error: E;
 } & ResultBase<T, E>;
 
-export type Result<T, E extends Error> = Ok<T, E> | Err<T, E>;
+export type Result<T, E> = Ok<T, E> | Err<T, E>;
 
-export function ok<T, E extends Error>(value: T): Result<T, E> {
+export function ok<T, E>(value: T): Result<T, E> {
   return {
     unwrapOrDefault: () => value,
     unwrapOrElse: () => value,
@@ -43,7 +43,7 @@ export function ok<T, E extends Error>(value: T): Result<T, E> {
   };
 }
 
-export function error<T, E extends Error>(err: E): Result<T, E> {
+export function error<T, E>(err: E): Result<T, E> {
   return {
     unwrapOrDefault: (fallback: T): T => fallback,
     unwrapOrElse: (orElse: () => T): T => orElse(),
@@ -52,7 +52,7 @@ export function error<T, E extends Error>(err: E): Result<T, E> {
     },
 
     map: () => error(err),
-    mapError: <TMappedError extends Error>(
+    mapError: <TMappedError>(
       mapper: (err: E) => TMappedError
     ) => {
       return error<T, TMappedError>(mapper(err));
@@ -64,7 +64,7 @@ export function error<T, E extends Error>(err: E): Result<T, E> {
   };
 }
 
-export function isResult<T, E extends Error>(
+export function isResult<T, E>(
   obj: unknown
 ): obj is Result<T, E> {
   return (

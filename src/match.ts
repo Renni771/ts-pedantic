@@ -20,12 +20,12 @@ export function isOptionMatcher<T>(
   );
 }
 
-export type ResultMatcher<T, E extends Error> = {
+export type ResultMatcher<T, E> = {
   onOk: (value: T) => unknown;
   onError: (error: E) => unknown;
 };
 
-export function isResultMatcher<T, E extends Error>(
+export function isResultMatcher<T, E>(
   matcher: unknown
 ): matcher is ResultMatcher<T, E> {
   return (
@@ -39,9 +39,9 @@ export function isResultMatcher<T, E extends Error>(
   );
 }
 
-export function match<T, E extends Error | undefined = undefined>(
-  pattern: E extends Error ? Result<T, E> : Option<T>,
-  matcher: E extends Error ? ResultMatcher<T, E> : OptionMatcher<T>
+export function match<T, E  = undefined>(
+  pattern: E extends undefined ? Option<T> : Result<T, E>,
+  matcher: E extends undefined ? OptionMatcher<T> : ResultMatcher<T, E>
 ) {
   if (isOption(pattern) && isOptionMatcher(matcher)) {
     if (pattern.isSome) {
