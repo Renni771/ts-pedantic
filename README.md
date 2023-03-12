@@ -17,6 +17,9 @@
 
 <br/>
 
+> **Warning**
+> This library is still in its pre-release phase, so the API could change before it hits 1.0. Please feel free to contribute if you find any issues!
+
 ## Rationale
 
 Options and Results encourage more pedantic error handling. Most importantly, your code indicates whether a function
