@@ -1,5 +1,11 @@
 # ts-pedantic
 
+## 0.2.1
+
+### Patch Changes
+
+- ef808d8: ci: Minify package on build
+
 ## 0.2.0
 
 ### Minor Changes
