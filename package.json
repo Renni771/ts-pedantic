@@ -15,7 +15,7 @@
     "url": "https://github.com/Renni771/ts-pedantic"
   },
   "scripts": {
-    "build": "tsup src --format cjs,esm --dts",
+    "build": "tsup src --format cjs,esm --dts --minify",
     "clean": "rm -rf {dist,node_modules}",
     "dev": "vitest --reporter verbose",
     "format": "prettier --write .",
